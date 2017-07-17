@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>New Original Calculator</title>
+	
+    <meta name="viewport" content="width=device-width" initial-scale="1.0" charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="js/jquery-ui/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="js/jquery-ui/jquery-ui.theme.css">
+	<script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+<script>
+var b;
+var firstvalue=0;
+var secondvalue=0;
+var oper= '';
+var s;
+
+
+function number(u)
+{
+	/*document.getElementById('screen').value +=u;*/
+	
+	if(document.getElementById('on').value==="ON")
+		{
+			document.getElementById("screen").value +='';
+			var s=document.getElementById("show").innerHTML;
+			document.getElementById("show").innerHTML='<marquee direction="left" style="font-size:15px;color:red;">Switch on to start</marquee>';
+			
+		}
+		else if(document.getElementById("screen").value==="0")
+		{
+			document.getElementById("show").innerHTML='<center style="font-size:20px;color:#633;">Start</center>';
+			document.getElementById("screen").value=u;
+		}
+		else {document.getElementById("screen").value+=u;}
+}
+
+function operator(v)
+{
+	firstvalue=document.getElementById('screen').value;
+	document.getElementById('screen').value='';
+	oper = v;
+}
+function equal()
+{
+	secondvalue=document.getElementById('screen').value;
+	if(oper == 'mult')	
+	{
+		document.getElementById('screen').value= (firstvalue) * (secondvalue);
+	}
+	else if(oper == 'minus')
+	{
+		document.getElementById('screen').value= (firstvalue) - (secondvalue);
+	}
+	else if(oper == 'div')
+	{
+		document.getElementById('screen').value= (firstvalue) / (secondvalue);
+	}
+	else if(oper == 'plus')
+	{
+		document.getElementById('screen').value= parseInt(firstvalue) + parseInt(secondvalue);
+	}
+	else if(oper == 'per')
+	{
+		document.getElementById('screen').value=(firstvalue)/('100');
+	}
+	else if(oper == 'square')
+	{
+		document.getElementById('screen').value=(firstvalue)*(firstvalue);
+	}
+	else if(oper == 'sqroot')
+	{
+		document.getElementById('screen').value=Math.sqrt(firstvalue);
+	}
+	else if(oper == 'sinee')
+	{
+		document.getElementById('screen').value=Math.sin(firstvalue);
+	}
+	else if(oper == 'cosi')
+	{
+		document.getElementById('screen').value=Math.cos(firstvalue);
+	}
+	else if(oper == 'tangent')
+	{
+		document.getElementById('screen').value=Math.tan(firstvalue);
+	}
+}
+	function clean()
+	{
+		document.getElementById('screen').value='';
+	}
+	function del()
+	{
+		var value=document.getElementById('screen').value;
+		document.getElementById('screen').value= value.substr(0, value.length -1)
+	}
+	function turn()
+	{
+		
+		if(document.getElementById('on').value=='ON')
+		{
+		document.getElementById('on').value='OFF';
+		document.getElementById('screen').value=0;
+		}
+		else if(document.getElementById('on').value=='OFF')
+		{
+			document.getElementById('on').value='ON';
+			document.getElementById('screen').value='';			
+	
+		}
+		
+	}
+
+</script>
+
+<style type="text/css">
+.row
+	{
+		margin-top: 10px;
+	}
+	.col-md-3
+	{
+		background-color:#825724;
+		padding: 7px;
+		border: 10px solid #966;
+		border-radius: 20px;
+
+
+	}
+
+		table{
+		background-color: #DEDEBE;
+		border:5px solid #CC9;
+		border-top-width:20px; 	
+		width:100%;	
+			 }
+			 
+		#plus{height:90px; }
+		
+		input[type=button]{
+			width: 85%;
+			height:40px;
+			margin: 5px;
+			border-radius:10px;
+			border:2px solid #630;
+			}
+		input[type=button]:hover{background-color:#633;}
+		
+		#eraz,#del{background-color:#F99; border:2px solid red;}
+		
+		input[type=text]{
+			width:100%;
+			height: 60px; font-size:18px;
+			}
+		#b,#plus{background-color:#FCF;}
+		#b:hover{background-color:#660;}
+		#plus:hover{background-color:#660;}
+		#on{background-color:#9CF; border:2px solid #966;width: 20%;}
+		#on:hover{background-color:#660; color:white;}
+		
+		#num:hover{color:white; font-size:20px;
+				}
+		
+				
+		
+	</style>
+
+
+</head>
+
+<body class="bg-success" >
+<div class="container">
+<div class="row">
+	<div class="col-md-3">
+<table>
+  <tr>
+    <td colspan="4" style="font-size:12px; font-family:arial-black; color:#633; background-color:#CC9" ><input type="text" id="screen" readonly="readonly"><br>ORIGINAL CALCULATOR</td>
+  </tr>
+  <tr>
+    <td id="num" colspan="4"><input type="button" name="on" id="on" value="ON" onclick="turn()" style="float:right;"><br></td>
+  </tr>
+  <tr>
+ 	<td id="num" ><input type="button" name="b2" id="eraz" value="C"  onclick="clean()"></td>
+    <td width="25%" id="num"><input type="button" name="b3" id="del" value="<Del"  onclick="del()"/></td>
+ 	<td colspan="2" id="show"></td>
+    </tr>
+   <tr>
+   	 <td id="num"><input type="button" name="b14" id="b" value="sin"  onclick='operator("sinee")'></td>
+  	<td width="25%" id="num"><input type="button" name="b14" id="b" value="cos"  onclick='operator("cosi")'></td>
+    <td id="num"><input type="button" name="b14" id="b" value="tan"  onclick='operator("tangent")'></td>
+    <td id="num"><input type="button" name="b14" id="b" value=""  onclick='operator("")'></td>
+   </tr>
+   <tr>
+    <td id="num"><input type="button" name="b14" id="b" value="x&sup2;"  onclick='operator("square")'></td>
+  	<td width="25%" id="num"><input type="button" name="b14" id="b" value="&sup2;&radic;"  onclick='operator("sqroot")'></td>
+    <td id="num"><input type="button" name="b14" id="b" value="%"  onclick='operator("per")'></td>
+    <td id="num"><input type="button" name="b14" id="b" value="x"  onclick='operator("mult")'></td>
+    
+  </tr>
+  <tr>
+    <td id="num"><input type="button" name="b1" id="b1" value="1" onclick='number("1")'/></td>
+    <td width="25%" id="num"><input type="button" name="b2" id="b2" value="2"  onclick='number("2")'/></td>
+    <td id="num"><input type="button" name="b3" id="b3" value="3"  onclick='number("3")'/></td>
+    <td id="num"><input type="button" name="b" id="b" value="-" onclick='operator("minus")'/></td>
+    
+  </tr>
+  <tr>
+    <td id="num"><input type="button" name="b6" id="b6" value="4" onclick='number("4")'/></td>
+    <td width="25%" id="num"><input type="button" name="b7" id="b7" value="5" onclick='number("5")'/></td>
+    <td id="num"><input type="button" name="b8" id="b8" value="6" onclick='number("6")'/></td>
+    <td id="num"><input type="button" name="b9" id="b" value="/" onclick='operator("div")'/></td>
+    
+  </tr>
+  <tr>
+    <td id="num"><input type="button" name="b11" id="b11" value="7" onclick='number("7")'/></td>
+    <td width="25%" id="num"><input type="button" name="b12" id="b12" value="8" onclick='number("8")'/></td>
+    <td id="num"><input type="button" name="b13" id="b13" value="9" onclick='number("9")'/></td>
+    <td rowspan="2" id="num"><input type="button" name="b4" id="plus" value="+" onclick='operator("plus")'></td>
+  
+  </tr>
+  <tr>
+    <td id="num"><input type="button" name="b11" id="b11" value="0" onclick='number("0")' /></td>
+    <td width="25%" id="num"><input type="button" name="b12" id="b12" value="." onclick='number(".")'/></td>
+    <td id="num"><input type="button" name="b13" id="b" value="=" onclick="equal()"/></td>
+   
+  
+  </tr>
+  <tr><td colspan="5" style="font-family:Palatino; font-style:italic; color:#600; text-align:center;">&copy;Dokiiworld 2017</td></tr>
+</table>
+	</div>
+</div>
+</div>
+
+</body>
+</html>
